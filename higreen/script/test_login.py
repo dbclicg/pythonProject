@@ -22,7 +22,7 @@ class Test_login(unittest.TestCase):
     def tearDownClass(cls):
         Driver.driver_quit()
 
-    @file_data(r'C:\Users\23226\PycharmProjects\pythonProject\higreen\test_data\data_login.json')
+    @file_data(r'E:\git\pythonProject\higreen\test_data\data_login.json')
     def test_login(self, username, pwd, isyonghxy, verdict, expected, tuichu):
         self.logindriver.page_login(username, pwd, isyonghxy)
         """

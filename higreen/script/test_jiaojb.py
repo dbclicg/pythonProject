@@ -18,9 +18,9 @@ class Jiaojb(unittest.TestCase):
     def tearDownClass(cls) -> None:
         Driver.driver_quit()
 
-    @file_data(r"C:\Users\23226\PycharmProjects\pythonProject\higreen\test_data\data_jiaojb.json")
+    @file_data(r"E:\git\pythonProject\higreen\test_data\data_jiaojb.json")
     def test_jiaojb(self, wup, wupsl, wup01, wupsl01, beizxx, message):
-        if self.dver.login().base_find_element(element.gongz) == False:
+        if self.dver.login().get_toast(element.gongz) != "工作":
             self.dver.login().page_zclogin()
         else:
             print(">>>>>>>>>>>>程序已登录")
