@@ -17,6 +17,7 @@ class Base_element:
         """
         try:
             return WebDriverWait(self.driver, timeout=time, poll_frequency=poll).until(lambda x: x.find_element(*loc))
+
         except Exception as ree:
             print('element,find{}元素错误输出：'.format(loc), ree)
 

@@ -1,7 +1,13 @@
+# -*- coding: utf-8 -*-
+# coding=utf-8
+# @Time    : 2021/12/4 10:11
+# @Author  : 牛逼哥
+# @FileName: te.py
+# @Software: PyCharm
 from appium.webdriver.common.appiumby import AppiumBy
 
 """工作"""
-gongz = AppiumBy.XPATH, '//*[@text="工作"]'
+gongz = AppiumBy.XPATH, r'//*[@text="工作"]'
 
 """交接班"""
 jiaojb = AppiumBy.XPATH, '//*[@text="交接班"]'

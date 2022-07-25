@@ -40,19 +40,37 @@ class Base_operate_element(base_find_element.Base_element):
         """
         self.base_find_element(loc).clear().send_keys(value)
 
-    def get_toast(self, message):
-        """
-        获取text信息
-        :param message:
-        :return:
-        """
+    def get_toast(self, text):
+        '''
+        is toast exist, return True or False
+
+        :Agrs:
+
+         - driver - 传driver
+
+         - text   - 页面上看到的文本内容
+
+         - timeout - 最大超时时间，默认30s
+
+         - poll_frequency  - 间隔查询时间，默认0.5s查询一次
+
+        :Usage:
+
+         is_toast_exist(driver, "看到的内容")
+
+        '''
+
         try:
-            toast_message = AppiumBy.XPATH, "//*[@text='{}']".format(message)
-            toast_element = self.base_find_element(toast_message, 5, 0.001).text
-            print('输出text弹窗信息：', toast_element)
-            return toast_element
+
+            toast_loc = ("xpath", ".//*[contains(@text,'%s')]" % text)
+
+            self.base_find_element(toast_loc, time=5, poll=0.01)
+
+            return True
+
         except:
-            print("没有找到这个toast！")
+
+            return False
 
     def base_screenshot(self):
         """
@@ -97,7 +115,7 @@ class Base_operate_element(base_find_element.Base_element):
         except:
             raise
 
-    def swipe_down(self, t=500, n=1):
+    def swipe_down(self, t=10, n=1):
         """
         向下滑动
         :return:
@@ -113,7 +131,7 @@ class Base_operate_element(base_find_element.Base_element):
         except:
             print("没有找到该元素")
 
-    def swipe_up(self, t=500, n=1):
+    def swipe_up(self, t=10, n=1):
         """
         向上滑动
         :return:
@@ -134,7 +152,7 @@ class Base_operate_element(base_find_element.Base_element):
         except:
             print("没有找到该元素")
 
-    def swipe_right(self, t=500, n=1):
+    def swipe_right(self, t=10, n=1):
 
         try:
             size = self.get_window_size()
@@ -148,7 +166,7 @@ class Base_operate_element(base_find_element.Base_element):
 
             raise
 
-    def swipe_left(self, t=500, n=1):
+    def swipe_left(self, t=10, n=1):
         try:
             size = self.get_window_size()
             start_x = size[0] * 0.9
