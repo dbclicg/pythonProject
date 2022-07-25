@@ -59,18 +59,19 @@ class Base_operate_element(base_find_element.Base_element):
          is_toast_exist(driver, "看到的内容")
 
         '''
+        
 
-        try:
-
-            toast_loc = ("xpath", ".//*[contains(@text,'%s')]" % text)
-
-            self.base_find_element(toast_loc, time=5, poll=0.01)
-
-            return True
-
-        except:
-
-            return False
+        # try:
+        #
+        #     toast_loc = ("xpath", ".//*[contains(@text,'%s')]" % text)
+        #     text = self.base_presence_of_element_located(toast_loc).tsxt
+        #     print(">>>>>>>>>>", text)
+        #     #self.base_find_element(toast_loc, time=5, poll=0.01)
+        #     return text
+        #
+        # except:
+        #
+        #     return False
 
     def base_screenshot(self):
         """

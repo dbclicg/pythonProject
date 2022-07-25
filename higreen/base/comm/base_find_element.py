@@ -1,3 +1,5 @@
+from telnetlib import EC
+
 from appium.webdriver.common.mobileby import MobileBy
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -6,6 +8,13 @@ from selenium.webdriver.support import expected_conditions as ec
 class Base_element:
     def __init__(self, driver):
         self.driver = driver
+
+    def base_presence_of_element_located(self, toast_loc):
+        try:
+            return WebDriverWait(self.driver, 5, 0.2).until(ec.presence_of_element_located(toast_loc))
+
+        except Exception as ree:
+            print('element,find{}元素错误输出：', ree)
 
     def base_find_element(self, loc, time=30, poll=0.5):
         """
