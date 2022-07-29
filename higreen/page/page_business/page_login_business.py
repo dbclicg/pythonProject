@@ -80,7 +80,11 @@ class Page_login_business(Base_operate_element):
         点击我的
         :return:
         """
-        self.base_click(element.wod)
+        if self.base_find_element(element.wod, 2, 0.1):
+            self.base_click(element.wod)
+            return True
+        else:
+            return False
 
     def page_qiehzh(self):
         """
@@ -111,10 +115,19 @@ class Page_login_business(Base_operate_element):
         self.page_lijdl()
 
     def page_zclogin(self):
+        """正常登录账号"""
         self.page_shic()
         self.page_uesr(element.uesrname)
         self.page_pwd(element.password)
         self.page_yonghxy(element.isyonghxy)
+        self.page_lijdl()
+
+    def page_jiaobrlogin(self):
+        """接班人登录账号"""
+        self.page_shic()
+        self.page_uesr(element.uesrname1)
+        self.page_pwd(element.password1)
+        self.page_yonghxy(element.isyonghxy1)
         self.page_lijdl()
 
 

@@ -4,20 +4,19 @@
 # @Author  : 牛逼哥
 # @FileName: te.py
 # @Software: PyCharm
+import os
 import time
+import shutil
 
 from appium.webdriver.common.appiumby import AppiumBy
-from appium.webdriver.common.mobileby import MobileBy
-from selenium.webdriver.support import expected_conditions as ec
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-
+from appium.webdriver.common.touch_action import TouchAction
+from higreen.base.comm import file
 from higreen.base.comm import base_find_element
 
 
 class Base_operate_element(base_find_element.Base_element):
     __checked = False
+
     """
     常用元素操作类
     """
@@ -30,6 +29,12 @@ class Base_operate_element(base_find_element.Base_element):
         """
         self.base_find_element(loc).click()
 
+    def base_elements_click(self, loc):
+        elementlist = self.base_find_elements(loc)
+        print(">>>>>>>>列表：", len(elementlist))
+        for list in elementlist:
+            list.click()
+
     def base_sebnd_keys(self, loc, value):
         """
         ：输入操作封装
@@ -40,8 +45,19 @@ class Base_operate_element(base_find_element.Base_element):
         """
         self.base_find_element(loc).clear().send_keys(value)
 
+    def base_text(self, loc):
+        """
+        获取text
+        :param loc:
+        :return:
+        """
+        ele_toast = self.base_find_element_located(loc)
+        el_toast = ele_toast.text
+        print(">>>>>>>>>提示：", ele_toast.text)
+        return el_toast
+
     def get_toast(self, text):
-        '''
+        """
         is toast exist, return True or False
 
         :Agrs:
@@ -58,28 +74,26 @@ class Base_operate_element(base_find_element.Base_element):
 
          is_toast_exist(driver, "看到的内容")
 
-        '''
-        
+        """
 
-        # try:
-        #
-        #     toast_loc = ("xpath", ".//*[contains(@text,'%s')]" % text)
-        #     text = self.base_presence_of_element_located(toast_loc).tsxt
-        #     print(">>>>>>>>>>", text)
-        #     #self.base_find_element(toast_loc, time=5, poll=0.01)
-        #     return text
-        #
-        # except:
-        #
-        #     return False
+        try:
+            toast_loc = (AppiumBy.XPATH, ".//*[contains(@text,'%s')]" % text)
+            element = self.base_find_element(toast_loc, time=5, poll=0.01)
+            print(">>>>>>>>>提示：", element.text)
+            return True
+
+        except:
+
+            return False
 
     def base_screenshot(self):
         """
         截图保存
         :return:
         """
-        self.driver.get_screenshot_as_file(r'C:\Users\23226\PycharmProjects\pythonProject\higreen\Outputs\screenshot'
-                                           r'\{}.png'.format(
+        shutil.rmtree(r'E:\git\pythonProject\higreen\Outputs\screenshot')
+        os.mkdir(r'E:\git\pythonProject\higreen\Outputs\screenshot')
+        self.driver.get_screenshot_as_file(file.jietbc + r'\{}.png'.format(
             time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time()))))
 
     def base_target_click(self, X1, Y1):  # x1,y1为你编写脚本时适用设备的实际坐标
@@ -93,15 +107,6 @@ class Base_operate_element(base_find_element.Base_element):
         print(x, y)  # 打印出点击的坐标点
         print(x_1 * x, y_1 * y)
         self.driver.tap([(x_1 * x, y_1 * y)], 500)  # 模拟单手点击操作
-
-    def base_checked(self, loc, isyonghxy):
-
-        if isyonghxy == False:
-            self.base_click(loc)
-            print('勾选成功')
-        else:
-            print('已勾选协议')
-        time.sleep(1)
 
     def get_window_size(self):
         """
@@ -140,13 +145,9 @@ class Base_operate_element(base_find_element.Base_element):
         try:
             size = self.get_window_size()
             start_x = size[0] * 0.5
-            print("--------乘0.5后x12", start_x, "---------乘0.5前", size[0])
             start_y = size[1] * 0.8
-            print("--------乘0.8后y1", start_y, "---------乘0.8前", size[1])
             end_x = size[0] * 0.5
-            print("--------乘0.5后x12", start_x, "---------乘0.5前", size[0])
             end_y = size[1] * 0.4
-            print("--------乘0.4后y2", end_y, "---------乘0.4前", size[1])
             for i in range(n):
                 self.driver.swipe(start_x, start_y, end_x, end_y, t)
 
@@ -179,12 +180,17 @@ class Base_operate_element(base_find_element.Base_element):
         except:
             raise
 
-    def swipe_find(self, element):
-        x = 1
-        while x == 1:
-            if self.find_element(element) == 1:
-                self.swipe_up(2500)
-                time.sleep(2)
-            else:
-                print("找到了")
-                x = 2
+    def seipe_all(self):
+        self.swipe_down()
+        self.swipe_up()
+        self.swipe_left()
+        self.swipe_right()
+
+    def base_checked(self, loc, isyonghxy):
+
+        if isyonghxy == False:
+            self.base_click(loc)
+            print('勾选成功')
+        else:
+            print('已勾选协议')
+        time.sleep(1)

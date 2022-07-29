@@ -12,6 +12,11 @@ uesrname = 'licc'
 password = '123456'
 isyonghxy = False
 
+"""正常登录账号密码"""
+uesrname1 = 'luhao'
+password1 = '1234'
+isyonghxy1 = False
+
 """市场"""
 shic = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/base_content"]/android.widget.RelativeLayout[' \
                  '2]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1] '
