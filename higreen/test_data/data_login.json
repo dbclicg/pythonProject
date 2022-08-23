@@ -1,4 +1,11 @@
 {
-  "正确用户密码":{"username":"licc","pwd":"123456","isyonghxy": false, "verdict": true,"expected":"camera1", "tuichu":"立即登录"}
+  "用户为空":{"title":"用户为空","user":"","password":"1234","isyonghxy": true, "message": "148456","verdict":false},
+  "密码为空":{"title":"密码为空","user":"tangxy","password":"","isyonghxy": true, "message": "用户密码不能为空","verdict":false},
+  "用户与密码为空":{"title":"用户与密码为空","user":"","password":"","isyonghxy": true, "message": "用户名不能为空","verdict":false},
+  "不同意协议":{"title":"不同意协议","user":"tangxy","password":"1234","isyonghxy": true, "message": "请勾选并同意《用户协议》与《隐私政策》","verdict":false},
+  "正常登录":{"title":"正常登录","user":"tangxy","password":"1234","isyonghxy": false, "message": "唐细燕","verdict":true},
+  "用户名错误":{"title":"用户名错误","user":"fhsaf","password":"1234","isyonghxy": false, "message": "用户名或密码错误","verdict":false},
+  "密码错误":{"title":"密码错误","user":"tangxy","password":"45783","isyonghxy": true, "message": "用户名或密码错误","verdict":false},
+  "用户名与密码错误":{"title":"用户名与密码错误","user":"———@","password":"/*789","isyonghxy": true, "message": "用户名或密码错误","verdict":false}
 }
 

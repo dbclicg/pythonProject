@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2021/12/4 10:11
-# @Author  : 牛逼哥
+# @Author  :
 # @FileName: te.py
 # @Software: PyCharm
 import time
@@ -87,8 +87,8 @@ class Page_jiaojb_business(Base_operate_element):
         :return:
         """
         self.base_click(element.tianjiawp)
-        self.base_sebnd_keys(element.wup01, wup01)
-        self.base_sebnd_keys(element.wupsl01, wupsl01)
+        #self.base_sebnd_keys(element.wup01, wup01)
+        #self.base_sebnd_keys(element.wupsl01, wupsl01)
 
     def page_sebnd_keys_beiz(self, beizxx):
         """
@@ -117,6 +117,7 @@ class Page_jiaojb_business(Base_operate_element):
     def page_clock_tijjb(self):
         """提交交班"""
         self.base_click(element.tijjb)
+
 
     def page_clock_xiangq(self):
         """查看交接班详情"""
@@ -151,7 +152,7 @@ class Page_jiaojb_business(Base_operate_element):
         """
         self.base_click(element.xuanzdbgly)
         x = False
-        while x == False:
+        while not x:
             if self.base_find_element(element.danbgly, 2, 0.05):
                 self.base_click(element.danbgly)
                 time.sleep(1)
@@ -201,7 +202,7 @@ class Page_jiaojb_business(Base_operate_element):
         self.page_clock_xuanzbc()
         self.page_clock_xuanzfzqy()
         self.page_sebnd_keys_wup(wup, wupsl)
-        self.page_clock_tianjiawp(wup01, wupsl01)
+        #self.page_clock_tianjiawp(wup01, wupsl01)
         self.page_sebnd_keys_beiz(beizxx)
         self.page_clock_shangctp()
         self.page_clock_tijjb()
@@ -214,4 +215,6 @@ class Page_jiaojb_business(Base_operate_element):
         self.page_quedgly()
         self.page_dianzqm()
         self.page_tijiaojb()
+
+
 

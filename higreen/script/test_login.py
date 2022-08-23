@@ -1,101 +1,126 @@
+import os
+import shutil
 import unittest
-
-from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.common.by import By
-
+from higreen.base.comm.excel_read import excel_to_list
 from higreen.base.base_driver.base_driver import Driver
-from higreen.page.element import jiaojb_element as element
+from higreen.page.element import login_element as element
 from higreen.page.Call_Page import Call_page
-from ddt import ddt, file_data
-from higreen.base.comm import file
+from ddt import file_data, data, ddt
+from higreen.base.comm.config import file
 
 @ddt
 class Test_login(unittest.TestCase):
     driver = None
-    sure_text = ["同意", "允许", "始终允许", "取消", "确定"]
+    # xlsx = excel_to_list("TestLogin") # Excel数据驱动
+
     @classmethod
     def setUpClass(cls):
         cls.driver = Driver.driver_get()
         cls.logindriver = Call_page(cls.driver).login()
-
+        shutil.rmtree(r'E:\git\pythonProject\higreen\Outputs\screenshot')
+        os.mkdir(r'E:\git\pythonProject\higreen\Outputs\screenshot')
 
     @classmethod
     def tearDownClass(cls):
+
         Driver.driver_quit()
 
-    @file_data(file.login)
-    def test_login(self, username, pwd, isyonghxy, verdict, expected, tuichu, cycle=3):
-        if self.logindriver.base_find_element(element.gongz, time=3, poll=0.05) is not None:
+    @file_data(file.login_test_cases)
+    def test_login(self, title, user, password, isyonghxy, message, verdict):
+        if not self.logindriver.base_find_element(element.lijdl, 2):
             """
+            平湖海吉星——————已登录执行
             判断app是否已登录,已登录则执行退出登录
             """
-            for i in range(cycle):
-                """
-                处理系统弹窗
-                """
-                for i in self.sure_text:
-                    try:
-                        popup = self.driver.find_element(AppiumBy.XPATH, "//*[@text='%s']" % i)
-                        if popup:
-                            popup.click()
-                        else:
-                            print(">>>>>>>>>>>>没有系统权限提示")
-                    except:
-                        pass
+            self.logindriver.base_click_system()
             self.logindriver.page_wod()
             self.logindriver.page_qiehzh()
             self.logindriver.page_querqh()
-        else:
-            print(">>>>>>>>>>>>没有登录")
-
-        self.logindriver.page_login(username, pwd, isyonghxy)
-        for i in range(cycle):
-            """
-            处理系统弹窗
-            """
-            for i in self.sure_text:
+            if verdict:
                 try:
-                    popup = self.driver.find_element(AppiumBy.XPATH, "//*[@text='%s']"%i)
-                    if popup:
-                            popup.click()
-                    else:
-                        print(">>>>>>>>>>>>没有系统权限提示")
-                except:
-                    pass
-
-        """
-        登录业务
-        """
-        if verdict:
-            """
-            verdict为True执行
-            """
-            try:
-                expecteds = self.logindriver.page_gongz(expected)
-                print('++++++', expecteds)
-                self.assertTrue(expecteds, ">>>>>>>>>>:登录验证失败")
-                """
-                判断登录是否成功正确
-                """
-            except AssertionError as err:
-                """
-                否则保存异常原因并截图保存
-                """
-                self.logindriver.base_screenshot()
-                raise err
-            finally:
-                self.logindriver.page_wod()
-                self.logindriver.page_qiehzh()
-                self.logindriver.page_querqh()
-                try:
-                    self.assertTrue(self.logindriver.get_toast(tuichu))
-                except AttributeError as e:
+                    self.logindriver.page_login(user, password, isyonghxy)
+                    """
+                    正常登录
+                    """
+                    self.logindriver.page_gongz()
+                    toast = self.logindriver.base_toast_content(message)
+                    self.assertTrue(toast, "正确用户密码登录断言失败toast =  {}".format(toast))
+                except AssertionError as ree:
                     self.logindriver.base_screenshot()
-                    raise e
+                    raise ree
+
+                finally:
+                    if not self.logindriver.base_find_element(element.lijdl, 2):
+                        """
+                        判断app是否已登录,已登录则执行退出登录
+                        """
+                        self.logindriver.base_click_system()
+                        self.logindriver.page_wod()
+                        self.logindriver.page_qiehzh()
+                        self.logindriver.page_querqh()
+
+                    else:
+                        pass
+            else:
+                try:
+                    self.logindriver.page_login(user, password, isyonghxy)
+                    self.logindriver.screenshot()
+                    """
+                    断言截图
+                    """
+                    istext = self.logindriver.is_text(message, title)
+                    """
+                    调用图片文字识别断言toast
+                    """
+                    self.assertTrue(istext, "预期结果>>>>>:{}".format(message))
+                except Exception as ree:
+                    self.logindriver.base_screenshot()
+                    raise ree
+
         else:
-            try:
-                expecteds = self.logindriver.get_toast(expected)
-                self.assertTrue(expecteds)
-            except Exception as rr:
-                self.logindriver.base_screenshot()
-                raise rr
+            """
+            平湖海吉星--------未登录执行
+            """
+            # try:
+            if verdict:
+                """
+                    """
+                try:
+                    self.logindriver.page_login(user, password, isyonghxy)
+                    """
+                        正常登录
+                        """
+                    self.logindriver.page_gongz()
+                    toast = self.logindriver.base_toast_content(message)
+                    self.assertTrue(toast, "正确用户密码登录断言失败toast =  {}".format(toast))
+                except AssertionError as ree:
+                    self.logindriver.base_screenshot()
+                    raise ree
+
+                finally:
+                    if not self.logindriver.base_find_element(element.lijdl, 2):
+                        """
+                            判断app是否已登录,已登录则执行退出登录
+                            """
+                        self.logindriver.base_click_system()
+                        self.logindriver.page_wod()
+                        self.logindriver.page_qiehzh()
+                        self.logindriver.page_querqh()
+
+                    else:
+                        pass
+            else:
+                try:
+                    self.logindriver.page_login(user, password, isyonghxy)
+                    self.logindriver.screenshot()
+                    """
+                    断言截图
+                    """
+                    istext = self.logindriver.is_text(message, title)
+                    """
+                    调用图片文字识别断言toast
+                    """
+                    self.assertTrue(istext, "预期结果>>>>>:{}".format(message))
+                except Exception as ree:
+                    self.logindriver.base_screenshot()
+                    raise ree

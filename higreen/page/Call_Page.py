@@ -1,5 +1,6 @@
 from higreen.page.page_business.page_login_business import Page_login_business
 from higreen.page.page_business.page_jiaojb_business import Page_jiaojb_business
+from higreen.page.page_business.page_shicxc_business import Page_shicxc
 
 
 class Call_page:
@@ -7,7 +8,22 @@ class Call_page:
         self.driver = driver
 
     def login(self):
+        """
+        登录测试
+        :return:
+        """
         return Page_login_business(self.driver)
 
     def jiaojb(self):
+        """
+        交接班测试
+        :return:
+        """
         return Page_jiaojb_business(self.driver)
+
+    def shicxc(self):
+        """
+        市场巡查测试
+        :return:
+        """
+        return Page_shicxc(self.driver)

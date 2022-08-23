@@ -45,7 +45,7 @@ class Page_login_business(Base_operate_element):
         勾选用户隐私协议
         :return:
         """
-        self.base_checked(element.yonghxydxk,isyonghxy)
+        self.base_checked(element.yonghxydxk, isyonghxy)
 
 
     def page_lijdl(self):
@@ -57,14 +57,12 @@ class Page_login_business(Base_operate_element):
 
 
 
-    def page_gongz(self,message):
+    def page_gongz(self):
         """
         点击工作
         :return:
         """
         self.base_click(element.gongz)
-        text = self.get_toast(message)
-        return text
 
 
     # def page_yonghm(self):
@@ -121,12 +119,15 @@ class Page_login_business(Base_operate_element):
         self.page_pwd(element.password)
         self.page_yonghxy(element.isyonghxy)
         self.page_lijdl()
+        self.base_click_system()
 
-    def page_jiaobrlogin(self):
-        """接班人登录账号"""
+        #self.base_click(element.gongz)
+
+    def page_jiaobrlogin(self, uesr, password1):
+        """交接班人登录账号"""
         self.page_shic()
-        self.page_uesr(element.uesrname1)
-        self.page_pwd(element.password1)
+        self.page_uesr(uesr)
+        self.page_pwd(password1)
         self.page_yonghxy(element.isyonghxy1)
         self.page_lijdl()
 
