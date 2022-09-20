@@ -5,7 +5,6 @@
 # @Software: PyCharm
 caps = {}
 caps["platformName"] = "Android"
-#caps["deviceName"] = "4ec8d1a1"  # 手机名称
 caps["deviceName"] = "127.0.0.1:62001"  # 手机名称
 caps["appPackage"] = "com.padmatek.szhigreenmb"  # 包名
 caps["appActivity"] = "com.ap.dbc.hjx.marker.app.Activity.Other.LauncherActivity"  # 程序启动名

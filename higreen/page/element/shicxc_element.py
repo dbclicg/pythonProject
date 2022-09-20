@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+# coding=utf-8
+# @Time    :
+# @Author  :
+# @FileName: te.py
+# @Software: PyCharm
+# @市场巡查页面---定位元素
 import random
 
 from appium.webdriver.common.appiumby import AppiumBy
@@ -43,7 +50,7 @@ dangwpz = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/layout_
 shoujpz = AppiumBy.XPATH, '//*[@resource-id="com.android.camera:id/v9_shutter_button_internal"]'
 """手机拍照"""
 
-quedtp = AppiumBy.XPATH, '//*[@resource-id="com.android.camera:id/inten_done_apply"]'
+quedtp = AppiumBy.ID, "com.android.camera2:id/done_button"
 """确定图片"""
 
 gelpz = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/gv_photo_select2"]/android.widget' \
@@ -62,18 +69,35 @@ pingf = AppiumBy.ID, 'com.padmatek.szhigreenmb:id/tv_score_1'
 dianzqm = AppiumBy.ID, 'com.padmatek.szhigreenmb:id/bt_signature'
 """点击电子签名"""
 
-"""电子签名第一个坐标"""
-x1 = 350
-y1 = 1600
-"""电子签名第二个坐标"""
-x2 = 700
-y2 = 1600
-"""电子签名第三个坐标"""
-x3 = 480
-y3 = 1300
-"""电子签名第四个坐标"""
-x4 = 480
-y4 = 1900
+# """电子签名第一个坐标"""
+# x1 = 350
+# y1 = 1600
+# """电子签名第二个坐标"""
+# x2 = 700
+# y2 = 1600
+# """电子签名第三个坐标"""
+# x3 = 480
+# y3 = 1300
+# """电子签名第四个坐标"""
+# x4 = 480
+# y4 = 1900
+
+X1 = 350
+Y1 = 1550
+X2 = 700
+Y2 = 1550
+X3 = 525
+Y3 = 1350
+X4 = 525
+Y4 = 2000
+X5 = 525
+Y5 = 1550
+X6 = 400
+Y6 = 1750
+X7 = 525
+Y7 = 1550
+X8 = 650
+Y8 = 1750
 
 quedqm = AppiumBy.ID, 'com.padmatek.szhigreenmb:id/bt_ok'
 """确定电子签名"""
@@ -90,8 +114,27 @@ chakjcd = AppiumBy.ID, "com.padmatek.szhigreenmb:id/ly_look_check_time"
 benyyxcjl = AppiumBy.ID, "com.padmatek.szhigreenmb:id/layout_check_over_record"
 """本月已巡查记录"""
 
+"""=====巡查整改====="""
 buhgjl = AppiumBy.ID, "com.padmatek.szhigreenmb:id/layout_check_unqualified"
 """不合格记录"""
 
-xuncxm_list = AppiumBy.XPATH, '//*[@text="消防巡查"]'
-"""巡查项目列表"""
+buhglbsj = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list_unqualifiled_recorde"]/android.widget.LinearLayout[1]'
+"""不合格整改数据"""
+
+zhenggtp = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/gv_photo_select"]/android.widget.RelativeLayout[1]'
+"""整改图片"""
+
+xuanztp = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/grid"]/android.widget.FrameLayout[2]/android.widget.ImageView[2]'
+"""选择整改图片"""
+
+wanc = AppiumBy.ID, "com.padmatek.szhigreenmb:id/bt_right"
+"""完成图片选择"""
+
+zhenggsm = AppiumBy.ID, "com.padmatek.szhigreenmb:id/et_remark"
+"""整改说明"""
+
+tijiao = AppiumBy.ID, "com.padmatek.szhigreenmb:id/bt_right"
+"""提交"""
+
+fanghui = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/iv_back"]/android.widget.ImageView[1]'
+"""返回"""

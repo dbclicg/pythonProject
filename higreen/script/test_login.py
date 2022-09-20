@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 import unittest
 from higreen.base.comm.excel_read import excel_to_list
 from higreen.base.base_driver.base_driver import Driver
@@ -11,21 +12,21 @@ from higreen.base.comm.config import file
 @ddt
 class Test_login(unittest.TestCase):
     driver = None
-    # xlsx = excel_to_list("TestLogin") # Excel数据驱动
 
     @classmethod
     def setUpClass(cls):
+        time.sleep(1)
         cls.driver = Driver.driver_get()
         cls.logindriver = Call_page(cls.driver).login()
-        shutil.rmtree(r'E:\git\pythonProject\higreen\Outputs\screenshot')
-        os.mkdir(r'E:\git\pythonProject\higreen\Outputs\screenshot')
+        # shutil.rmtree(r'E:\git\pythonProject\higreen\Outputs\screenshot')
+        # os.mkdir(r'E:\git\pythonProject\higreen\Outputs\screenshot')
 
     @classmethod
     def tearDownClass(cls):
 
         Driver.driver_quit()
 
-    @file_data(file.login_test_cases)
+    @file_data(file.login_test_data)
     def test_login(self, title, user, password, isyonghxy, message, verdict):
         if not self.logindriver.base_find_element(element.lijdl, 2):
             """
@@ -46,7 +47,6 @@ class Test_login(unittest.TestCase):
                     toast = self.logindriver.base_toast_content(message)
                     self.assertTrue(toast, "正确用户密码登录断言失败toast =  {}".format(toast))
                 except AssertionError as ree:
-                    self.logindriver.base_screenshot()
                     raise ree
 
                 finally:
@@ -74,7 +74,6 @@ class Test_login(unittest.TestCase):
                     """
                     self.assertTrue(istext, "预期结果>>>>>:{}".format(message))
                 except Exception as ree:
-                    self.logindriver.base_screenshot()
                     raise ree
 
         else:
@@ -88,21 +87,20 @@ class Test_login(unittest.TestCase):
                 try:
                     self.logindriver.page_login(user, password, isyonghxy)
                     """
-                        正常登录
-                        """
+                    正常登录
+                    """
+                    self.logindriver.base_click_system()
                     self.logindriver.page_gongz()
                     toast = self.logindriver.base_toast_content(message)
                     self.assertTrue(toast, "正确用户密码登录断言失败toast =  {}".format(toast))
                 except AssertionError as ree:
-                    self.logindriver.base_screenshot()
                     raise ree
 
                 finally:
                     if not self.logindriver.base_find_element(element.lijdl, 2):
                         """
-                            判断app是否已登录,已登录则执行退出登录
-                            """
-                        self.logindriver.base_click_system()
+                        判断app是否已登录,已登录则执行退出登录
+                        """
                         self.logindriver.page_wod()
                         self.logindriver.page_qiehzh()
                         self.logindriver.page_querqh()
@@ -122,5 +120,4 @@ class Test_login(unittest.TestCase):
                     """
                     self.assertTrue(istext, "预期结果>>>>>:{}".format(message))
                 except Exception as ree:
-                    self.logindriver.base_screenshot()
                     raise ree

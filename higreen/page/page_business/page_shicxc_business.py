@@ -1,3 +1,5 @@
+import os
+
 from higreen.page.element import shicxc_element as element
 from higreen.base.comm.base_operate_element import Base_operate_element
 from time import sleep
@@ -69,7 +71,8 @@ class Page_shicxc(Base_operate_element):
         """
         self.base_click(element.dangwpz)
         self.base_click_system()
-        self.base_click(element.shoujpz)
+        #self.base_click(element.shoujpz)
+        os.system('adb shell input keyevent 27')
         sleep(2)
         self.base_click(element.quedtp)
 
@@ -80,7 +83,8 @@ class Page_shicxc(Base_operate_element):
         """
         self.base_click(element.gelpz)
         self.base_click_system()
-        self.base_click(element.shoujpz)
+        os.system('adb shell input keyevent 27')
+        #self.base_click(element.shoujpz)
         sleep(2)
         self.base_click(element.quedtp)
 
@@ -106,7 +110,8 @@ class Page_shicxc(Base_operate_element):
         """
         self.swipe_element(element.dianzqm)
         self.base_click(element.dianzqm)
-        touch(self.driver).swipe_find(element.x1, element.y1, element.x2, element.y2, element.x3, element.y3, element.x4, element.y4)
+        self.swipe_find(element.X1, element.Y1, element.X2, element.Y2, element.X3, element.Y3, element.X4, element.Y4,
+                        element.X5, element.Y5, element.X6, element.Y6, element.X7, element.Y7, element.X8, element.Y8)
         self.base_click(element.quedqm)
 
     def page_beiz(self, value):
@@ -125,14 +130,21 @@ class Page_shicxc(Base_operate_element):
         """
         self.base_click(element.tij)
 
+    def page_click_fanhui(self):
+        """
+        点击返回
+        :return:
+        """
+        self.base_click(element.fanghui)
+
     def page_fail_shicxc(self, beiz='该数据为appium自动化测试数据'):
         """
         正常流程提交----不合格
         :param beiz:备注
         :return:
         """
-        self.page_click_gongz()
-        self.page_click_shicxccd()
+        # self.page_click_gongz()
+        # self.page_click_shicxccd()
         self.page_click_dangw()
         self.page_click_xuanzdangw()
         self.page_click_xuncxm()
@@ -265,3 +277,47 @@ class Page_shicxc(Base_operate_element):
         self.page_zhenggsj()
         self.page_zonghpf()
         self.page_tij()
+
+    def page_click_buhgjl(self):
+        """点击不合格记录"""
+        self.base_click(element.buhgjl)
+
+    def page_click_buhgzgsj(self):
+        """点击不合格整改数据"""
+        if self.base_find_element(element.buhglbsj):
+            self.base_click(element.buhglbsj)
+        else:
+            print(">>>>>>>>>不合格记录列表数据为空<<<<<<<<<")
+    def page_shangczgtp(self):
+        """上传整改图片"""
+        self.swipe_element(element.zhenggsm)
+        self.base_click(element.zhenggtp)
+        """点击整改图片上传按钮"""
+        self.base_click(element.xuanztp)
+        """选择图片"""
+        self.base_click(element.wanc)
+        """点击完成选择"""
+
+    def page_sebnd_keys_zhenggsm(self, value):
+        """输入整改说明"""
+        self.swipe_element(element.zhenggsm)
+        self.base_sebnd_keys(element.zhenggsm, value)
+
+    def page_click_tij(self):
+        """提交"""
+        self.base_click(element.tijiao)
+
+    def page_zhengg(self, value):
+        """
+        巡查整改
+        :return:
+        """
+        self.page_click_buhgjl()
+        if self.base_find_element(element.buhglbsj, 2):
+            self.base_click(element.buhglbsj)
+            self.page_shangczgtp()
+            self.page_sebnd_keys_zhenggsm(value)
+            self.page_click_tij()
+        else:
+            print(">>>>>>>>>不合格记录列表数据为空,后面流程跳过直接返回<<<<<<<<<")
+

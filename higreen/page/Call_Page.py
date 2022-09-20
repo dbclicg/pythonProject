@@ -1,6 +1,7 @@
 from higreen.page.page_business.page_login_business import Page_login_business
 from higreen.page.page_business.page_jiaojb_business import Page_jiaojb_business
 from higreen.page.page_business.page_shicxc_business import Page_shicxc
+from higreen.page.page_business.page_chouccj_business import Page_Chouccj
 
 
 class Call_page:
@@ -27,3 +28,10 @@ class Call_page:
         :return:
         """
         return Page_shicxc(self.driver)
+
+    def chouccj(self):
+        """
+        抽查抽检测试
+        :return:
+        """
+        return Page_Chouccj(self.driver)

@@ -3,12 +3,19 @@
 # @Author  :
 # @FileName: te.py
 # @Software: PyCharm
+import os
 import time
+from uiautomator2 import connect
+from appium.webdriver.common.appiumby import AppiumBy
 from higreen.page.element import jiaojb_element as element
 from higreen.base.comm.base_operate_element import Base_operate_element
 from higreen.base.comm.base_touchAction import Base_TouchAction as touch
+from higreen.base.comm.base_ActionChains import Base_ActionChains
+
 
 class Page_jiaojb_business(Base_operate_element):
+    """>>>>>>>>>>>>>>>>>交班<<<<<<<<<<<<<<"""
+
     def page_click_gongz(self):
         """
         点击工作
@@ -16,205 +23,247 @@ class Page_jiaojb_business(Base_operate_element):
         """
         self.base_click(element.gongz)
 
-    def page_click_jiaojb(self):
+    def page_click_jiaojbcd(self):
         """
-        点击交接班
+        点击交接班菜单
         :return:
         """
-        x = False
-        while x == False:
-            self.swipe_up()
-            if self.base_find_element(element.jiaojb, 5, 0.05):
-                self.base_click(element.jiaojb)
-                x = True
-            else:
-                x = False
+        self.swipe_element(element.jiaojbcd)
+        self.base_click(element.jiaojbcd)
 
-    def page_click_jiaojan(self):
+    def page_click_jiaoban(self):
         """
-        点击交班
-        :return:
-       """
-        self.base_click(element.jiaojan)
-
-    def page_clock_xuanzjbr(self):
-        """
-        点击选择接班人
+        点击交班按钮
         :return:
         """
-        self.base_click(element.xuanzjbr)
-        time.sleep(1)
-        x = False
-        while x == False:
-            if self.base_find_element(element.dianjijbr, 2, 0.05):
-                self.base_click(element.dianjijbr)
-                x = True
-            else:
-                self.swipe_up()
-                x = False
+        self.base_click(element.jiaoban)
 
-    def page_clock_xuanzbc(self):
+    def page_click_jiebrxzk(self, successor):
+        """
+        选择接班人
+        :return:
+        """
+        self.base_click(element.jiebrxzk)
+        """点击选择接班人"""
+        el = (AppiumBy.XPATH, '//*[@text="{}"]'.format(successor))
+        self.swipe_element(el)
+        self.base_click(el)
+
+    def page_click_jiebbcxzk(self, shift):
         """
         选择接班班次
         :return:
         """
-        self.base_click(element.dianjixzbc)
-        time.sleep(1)
-        self.base_click(element.xuanzbc)
+        self.base_click(element.jiebbcxzk)
+        """点击选择接班班次"""
+        el = (AppiumBy.XPATH, '//*[@text="{}"]'.format(shift))
+        self.base_click(el)
 
-    def page_clock_xuanzfzqy(self):
+    def page_click_fuzqyxzk(self):
         """
         选择负责区域
         :return:
         """
-        self.base_click(element.fuzqy)
-        time.sleep(1)
-        self.base_click(element.xuanzfzqy)
-        time.sleep(1)
-        self.base_click(element.tijiaofzqy)
+        self.base_click(element.fuzqyxzk)
+        """点击负责区域"""
+        self.base_click(element.quyu_list)
+        """选择点击负责区域"""
+        self.base_click(element.quyutj)
+        """提交"""
 
-    def page_sebnd_keys_wup(self, wup, wupsl):
+    def page_sebnd_wup(self, name, num):
         """
-        输入物品与数量
+        输入物品
+        :param num: 输入物品数量
+        :param name: 输入物品名称
         :return:
         """
-        self.base_sebnd_keys(element.wup, wup)
-        self.base_sebnd_keys(element.wupsl, wupsl)
+        self.base_sebnd_keys(element.wup_name, name)
+        """输入物品名称"""
+        self.base_sebnd_keys(element.wup_num, num)
+        """输入物品数量"""
 
-    def page_clock_tianjiawp(self, wup01, wupsl01):
+    def page_tianjwp(self, name, num, n=1):
+        """添加物品"""
+        for i in range(n):
+            self.base_click(element.tianjwp)
+            self.page_sebnd_wup(name, num)
+
+    def page_sebnd_beiz(self, value):
         """
-        添加物品
+        交接班现场管理情况
+        :param value: 情况描述
         :return:
         """
-        self.base_click(element.tianjiawp)
-        #self.base_sebnd_keys(element.wup01, wup01)
-        #self.base_sebnd_keys(element.wupsl01, wupsl01)
+        self.base_sebnd_keys(element.beiz, value)
 
-    def page_sebnd_keys_beiz(self, beizxx):
+    def page_xiangq(self):
         """
-        交接班现场情况描述
+        查看详情
         :return:
         """
-        self.base_sebnd_keys(element.beiz, beizxx)
+        self.base_click(element.jiaobsj)
 
-    def page_clock_shangctp(self):
+    def page_shanc(self):
         """
-        上传提交图片
+        删除交班数据
         :return:
         """
-        x = False
-        while x == False:
-            self.swipe_up()
-            if self.base_find_element(element.tianjiatpan, 5, 0.05):
-                self.base_click(element.tianjiatpan)
-                time.sleep(1)
-                self.base_click(element.xuanztp)
-                self.base_click(element.tijiaotp)
-                x = True
-            else:
-                x = False
+        self.base_click(element.shanc)
+        self.base_click(element.quedsc)
 
-    def page_clock_tijjb(self):
-        """提交交班"""
-        self.base_click(element.tijjb)
+    def page_tup(self):
+        """
+        拍照上传图片
+        :return:
+        """
+        self.swipe_element(element.tupscan)
+        self.base_click(element.tupscan)
+        self.base_click(element.xuanztp1)
+        self.base_click(element.xuanztp2)
+        self.base_click(element.xuanztp3)
+        self.base_click(element.tijtp)
 
-
-    def page_clock_xiangq(self):
-        """查看交接班详情"""
-        if self.base_find_element(element.jiaojblist):
-            self.base_click(element.jiaojblist)
-            return True
-        else:
-            print(">>>>>>>>找不到新增交接班信息数据，{}".format(element.jiaojblist))
-            return False
-
-    def page_clock_shanc(self):
-        """删除按钮"""
-        if self.base_find_element(element.shanc):
-            self.base_click(element.shanc)
-        else:
-            print(">>>>>>>>找不到新增交接班信息数据，{}".format(element.shanc))
+    def page_tijiao(self):
+        """
+        交班提交
+        :return:
+        """
+        self.base_click(element.tijiao)
 
     def page_fanghui(self):
         """返回"""
-        self.base_click(element.fanh)
+        self.base_click(element.fanghui)
 
-    def page_clock_tuic(self):
-        """切换接班人账号"""
-        self.base_click(element.wod)
-        self.base_click(element.qiehzh)
-        self.base_click(element.quedqh)
+    def page_normal_jiaob(self, successor, shift, name, num, value):
+        """正常交班"""
+        self.page_click_jiaoban()
+        self.page_click_jiebrxzk(successor)
+        self.page_click_jiebbcxzk(shift)
+        self.page_click_fuzqyxzk()
+        self.page_sebnd_wup(name, num)
+        self.page_tianjwp(name, num)
+        self.page_sebnd_beiz(value)
+        self.page_tup()
+        self.page_tijiao()
 
-    def page_xuanzgly(self):
+    def page_jiaob(self, successor, shift, name, num, value):
+        """不点击交班按钮"""
+        self.page_click_jiebrxzk(successor)
+        self.page_click_jiebbcxzk(shift)
+        self.page_click_fuzqyxzk()
+        self.page_sebnd_wup(name, num)
+        self.page_sebnd_beiz(value)
+        self.page_tup()
+        self.page_tijiao()
+
+    def page_jiebrk_jiaob(self, shift, name, num, value):
+        """接班人为空"""
+        self.page_click_jiebbcxzk(shift)
+        self.page_click_fuzqyxzk()
+        self.page_sebnd_wup(name, num)
+        self.page_sebnd_beiz(value)
+        self.page_tup()
+        self.page_tijiao()
+
+    def page_jiebbck_jiaob(self, successor, name, num, value):
+        """接班班次为空"""
+        self.page_click_jiebrxzk(successor)
+        self.page_click_fuzqyxzk()
+        self.page_sebnd_wup(name, num)
+        self.page_sebnd_beiz(value)
+        self.page_tup()
+        self.page_tijiao()
+
+    def page_fuzqyk_jiaob(self, successor, shift, name, num, value):
+        """负责区域为空"""
+        self.page_click_jiebrxzk(successor)
+        self.page_click_jiebbcxzk(shift)
+        self.page_sebnd_wup(name, num)
+        self.page_sebnd_beiz(value)
+        self.page_tup()
+        self.page_tijiao()
+
+    def page_tupwk_jiaob(self, successor, shift, name, num, value):
+        """图片为空"""
+        self.page_click_jiebrxzk(successor)
+        self.page_click_jiebbcxzk(shift)
+        self.page_click_fuzqyxzk()
+        self.page_sebnd_wup(name, num)
+        self.page_sebnd_beiz(value)
+        self.page_tijiao()
+
+    def page_kon_jiaob(self):
+        """为空提交"""
+        self.page_tijiao()
+
+    def page_wup_jiaob(self, successor, shift, name, num, value):
+        """添加物品"""
+        self.page_click_jiaoban()
+        self.page_click_jiebrxzk(successor)
+        self.page_click_jiebbcxzk(shift)
+        self.page_click_fuzqyxzk()
+        self.page_sebnd_wup(name, num)
+        self.page_tianjwp(name, num)
+        self.page_sebnd_beiz(value)
+        self.page_tup()
+        self.page_tijiao()
+
+    """>>>>>>>>>>>>>>>>>接班<<<<<<<<<<<<<<"""
+
+    def page_click_xuanzdbgly(self):
         """
-        选择管理员
+        选择当班管理员
         :return:
         """
+        self.base_click(element.dangbgly)
         self.base_click(element.xuanzdbgly)
-        x = False
-        while not x:
-            if self.base_find_element(element.danbgly, 2, 0.05):
-                self.base_click(element.danbgly)
-                time.sleep(1)
-                self.base_click(element.danbglyquer)
-                x = True
-            else:
-                self.swipe_up()
-                x = False
+        self.base_click(element.qued)
 
-    def page_quedgly(self):
+    def page_click_xuanzgw(self):
         """
-        选择岗位
+        选择管理员岗位
         :return:
         """
-        #self.base_elements_click(element.xuanzgw)
-        elementlist = self.base_find_elements(element.xuanzgw)
-        elementlists = len(elementlist)
-        print(">>>>>>>>列表：", len(elementlist))
-        for i in range(elementlists):
-            self.base_click(element.xuanzgw)
-            self.base_click(element.gangw)
+        elements = self.base_find_elements(element.guanlygw)
+        for i in range(len(elements)):
+            self.base_click(element.guanlygw)
+            self.base_click(element.xuanzglygw)
 
     def page_dianzqm(self):
-        """电子签名"""
-        x = False
-        while x == False:
-            self.swipe_up()
-            if self.base_find_element(element.dianzqm, 5, 0.05):
-                self.base_click(element.dianzqm)
-                time.sleep(1)
-                touch(self.driver).swipe_find(element.x1, element.y1, element.x2, element.y2, element.x3, element.y3, element.x4,
-                                element.y4)
-                self.base_click(element.qued)
-                x = True
-            else:
-                x = False
+        """
+        电子签名
+        :return:
+        """
+        self.swipe_element(element.dianzqm)
+        self.base_click(element.dianzqm)
 
-    def page_tijiaojb(self):
-        """提交接班"""
-        self.base_click(element.tijiaojb)
+        self.swipe_find(element.X1, element.Y1, element.X2, element.Y2, element.X3, element.Y3, element.X4, element.Y4,
+                        element.X5, element.Y5, element.X6, element.Y6, element.X7, element.Y7, element.X8, element.Y8)
+        self.base_click(element.dianzqmqd)
 
-    def page_jiaojb(self, wup='ceshui', wupsl=10, wup01='ceshi01', wupsl01=20, beizxx='测试'):
-        self.page_click_gongz()
-        self.page_click_jiaojb()
-        self.page_click_jiaojan()
-        self.page_clock_xuanzjbr()
-        self.page_clock_xuanzbc()
-        self.page_clock_xuanzfzqy()
-        self.page_sebnd_keys_wup(wup, wupsl)
-        #self.page_clock_tianjiawp(wup01, wupsl01)
-        self.page_sebnd_keys_beiz(beizxx)
-        self.page_clock_shangctp()
-        self.page_clock_tijjb()
+    def page_jiebtj(self):
+        """
+        点击接班提交
+        :return:
+        """
+        self.base_click(element.jiebtj)
 
-    def page_jieb(self):
-        self.page_click_gongz()
-        self.page_click_jiaojb()
-        self.page_clock_xiangq()
-        self.page_xuanzgly()
-        self.page_quedgly()
+    def page_normal_jieb(self, successor, shift, name, num, value):
+        """
+        正常接班
+        :param successor: 接班人
+        :param shift: 班次
+        :param name: 物品名称
+        :param num: 物品数量
+        :param value: 交接班现场管理情况
+        :return:
+        """
+        self.page_normal_jiaob(successor, shift, name, num, value)
+        self.page_xiangq()
+        self.page_click_xuanzdbgly()
+        self.page_click_xuanzgw()
         self.page_dianzqm()
-        self.page_tijiaojb()
-
-
-
+        time.sleep(2)
+        self.page_jiebtj()
+        time.sleep(5)

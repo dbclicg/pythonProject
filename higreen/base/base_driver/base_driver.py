@@ -36,5 +36,6 @@ class Driver:
 
 
 if __name__ == '__main__':
-    driver = Driver.driver_get()
+    driver = Driver
+    driver.driver_get()
     Driver.driver_quit()

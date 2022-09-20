@@ -1,3 +1,15 @@
 {
-  "正确交接班信息":{"wup":"对讲机","wupsl":"1","wup01": "手电筒", "wupsl01": "1","beizxx":"该交接班为appium自动化测试数据", "message":"操作成功"}
+  "正常交班":{"successor":"路浩","shift":"早班","name": "对讲机", "num": "1","value":"该交接班为appium自动化测试数据", "expected":"操作成功","title":"正常交班","verdict":true},
+  "为空提交":{"successor":"","shift":"","name": "", "num": "","value":"", "expected":"请选择接班人","title":"为空提交","verdict":false},
+  "接班人为空":{"successor":"路浩","shift":"早班","name": "对讲机", "num": "1","value":"该交接班为appium自动化测试数据", "expected":"请选择接班人","title":"接班人为空","verdict":false},
+  "接班班次为空":{"successor":"路浩","shift":"早班","name": "对讲机", "num": "1","value":"该交接班为appium自动化测试数据", "expected":"请选择接班班次","title":"接班班次为空","verdict":false},
+  "负责区域为空":{"successor":"路浩","shift":"早班","name": "对讲机", "num": "1","value":"该交接班为appium自动化测试数据", "expected":"请选择负责区域","title":"负责区域为空","verdict":false},
+  "物品为空":{"successor":"路浩","shift":"早班","name": "", "num": "","value":"该交接班为appium自动化测试数据", "expected":"操作成功","title":"物品为空","verdict":true},
+  "交接班现场管理情况为空":{"successor":"路浩","shift":"早班","name": "对讲机", "num": "1","value":"", "expected":"操作成功","title":"交接班现场管理情况为空","verdict":true},
+  "图片为空":{"successor":"路浩","shift":"早班","name": "对讲机", "num": "1","value":"该交接班为appium自动化测试数据", "expected":"请选择图片","title":"图片为空","verdict":false},
+  "交接班现场管理情况输入200长度":{"successor":"路浩","shift":"早班","name": "对讲机", "num": "1","value":"开始想西想小道消息对的人春天雪人兄弟下班挂电话打扮打扮打广告徐性感的还打不打宝宝学习好像不行吧相不相信不行不行不行不行不行不行不行不行不行不行不行下班v徐西关小学恭喜恭喜恭喜恭喜高跟鞋关系关系勾搭勾搭勾搭个好多个大宝贝大宝贝想表达吧嗒吧嗒的不对不对必须必须打工的大粑粑休息大宝贝打扮打扮行吧行吧小把戏不对不对不对不对过得好的不对不对不对不对豪大大咕嘟咕嘟郭德纲打个电话给大大个DVD不打不对不对不对结束", "expected":"操作成功","title":"交接班现场管理情况输入200长度","verdict":true},
+  "物品名称输入20长度":{"successor":"路浩","shift":"早班","name": "D对对对对对对我还是不是v是v是比上不足", "num": "2","value":"该交接班为appium自动化测试数据", "expected":"操作成功","title":"物品名称输入20长度","verdict":true},
+  "物品数量输入4长度":{"successor":"路浩","shift":"早班","name": "D对对对对对对我还是不是v是v是比上不足", "num": "9999","value":"该交接班为appium自动化测试数据", "expected":"操作成功","title":"物品数量输入4长度","verdict":true}
 }
+
+

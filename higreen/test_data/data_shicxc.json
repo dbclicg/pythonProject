@@ -1,0 +1,4 @@
+{
+  "市场巡查--不合格":{"message":"提交成功","zgmessage":"修改成功","title":"正常巡查--不合格流程用例","Rectification":true, "Rectification_explain":"整改说明"},
+  "市场巡查--合格":{"message":"提交成功","zgmessage":"","title":"正常巡查--合格流程用例","Rectification":false, "Rectification_explain":""}
+}

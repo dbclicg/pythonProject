@@ -3,7 +3,7 @@
 # @Author  : 牛逼哥
 # @FileName: te.py
 # @Software: PyCharm
-
+# @登录页面---定位元素
 from appium.webdriver.common.mobileby import AppiumBy
 from selenium.webdriver.common.by import By
 
@@ -17,42 +17,44 @@ uesrname1 = 'luhao'
 password1 = '1234'
 isyonghxy1 = False
 
-"""市场"""
+
 shic = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/base_content"]/android.widget.RelativeLayout[' \
                  '2]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1] '
+"""市场"""
 
+
+quedsc = By.XPATH, '//*[@text="确定"]'
 """确定市场"""
-quedsc = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/bt_ok"]'
 
-"""用户输入框"""
 uesr = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/uesr_name"]'
+"""用户输入框"""
 
-"""密码输入框"""
 pwd = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/user_pwd"]'
+"""密码输入框"""
 
-"""用户协议单选框"""
 yonghxydxk = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/login_iv_privacyAgree"]'
+"""用户协议单选框"""
 
-"""立即登录"""
 lijdl = By.XPATH, '//*[@text="立即登录"]'
+"""立即登录"""
 
-"""工作"""
 gongz = By.XPATH, '//*[@text="工作"]'
+"""工作"""
 
-"""用户名称"""
 yonghm = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/tv_user_name"]'
+"""用户名称"""
 
-"""我的"""
 wod = By.XPATH, '//*[@text="我的"]'
+"""我的"""
 
-"""切换账号"""
 qiehzh = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/layout_change_account"]'
+"""切换账号"""
 
-"""确定切换账号"""
 quedqh = By.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/tv_qx"]'
+"""确定切换账号"""
 
-"""取消允许后台定位"""
 quxhtdw = By.XPATH, "com.padmatek.szhigreenmb:id/dialog_common_btn_cancel"
+"""取消允许后台定位"""
 
-"""退出成功text"""
 tuiccg = By.XPATH, "//*[contains(@text,'退出')]"
+"""退出成功text"""

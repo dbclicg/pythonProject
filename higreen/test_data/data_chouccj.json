@@ -1,0 +1,4 @@
+{
+  "正常抽查--不通过":{"remark":"该数据为appium自动化测试数据！！！！","expect":"提交成功","title":"正常抽检--不通过流程用例","is_pass_not":false},
+  "正常抽查--通过":{"remark":"该数据为appium自动化测试数据！！！！","expect":"保存数据成功","title":"正常抽检--通过流程用例","is_pass_not":true}
+}

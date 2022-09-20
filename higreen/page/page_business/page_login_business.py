@@ -4,24 +4,24 @@
 # @FileName: te.py
 # @Software: PyCharm
 import time
-
 from higreen.page.element import login_element as element
 from higreen.base.comm.base_operate_element import Base_operate_element
 
 
 class Page_login_business(Base_operate_element):
     def page_shic(self):
-        self.base_click(element.shic)
-        """
-        点击选择市场
-        :return: 
-        """
-        self.base_target_click(810, 1200)
-        """
-        点击确认
-        :return: 
-        """
-
+        if self.base_toast_content("请选择市场"):
+            self.base_click(element.shic)
+            """
+            点击选择市场
+            :return: 
+            """
+            time.sleep(1)
+            self.base_target_click(1020, 1750)
+            """
+            点击确认
+            :return: 
+            """
 
     def page_uesr(self, uesrname):
         self.base_sebnd_keys(element.uesr, uesrname)
@@ -30,7 +30,8 @@ class Page_login_business(Base_operate_element):
         :param uesrname: 账户
         :return: 
         """
-        time.sleep(2)
+        time.sleep(1)
+
     def page_pwd(self, pwd):
         self.base_sebnd_keys(element.pwd, pwd)
         """
@@ -39,14 +40,12 @@ class Page_login_business(Base_operate_element):
         :return: 
         """
 
-
     def page_yonghxy(self,isyonghxy):
         """
         勾选用户隐私协议
         :return:
         """
         self.base_checked(element.yonghxydxk, isyonghxy)
-
 
     def page_lijdl(self):
         """
@@ -55,23 +54,12 @@ class Page_login_business(Base_operate_element):
         """
         self.base_click(element.lijdl)
 
-
-
     def page_gongz(self):
         """
         点击工作
         :return:
         """
         self.base_click(element.gongz)
-
-
-    # def page_yonghm(self):
-    #     self.page_gongz()
-    #     """
-    #     判断登录成功，获取用户名称
-    #     :return:
-    #     """
-    #     self.base_text(element.yonghm)
 
     def page_wod(self):
         """
@@ -98,12 +86,14 @@ class Page_login_business(Base_operate_element):
         """
         self.base_click(element.quedqh)
 
-    # def page_istuiccg(self):
-    #     """
-    #     判断是否登录成功
-    #     :return:
-    #     """
-    #     self.base_text(element.tuiccg)
+    def page_tuiczh(self):
+        """
+        退出账号
+        :return:
+        """
+        self.page_wod()
+        self.page_qiehzh()
+        self.page_querqh()
 
     def page_login(self, uesrname, pwd, isyonghxy):
         self.page_shic()
@@ -121,10 +111,8 @@ class Page_login_business(Base_operate_element):
         self.page_lijdl()
         self.base_click_system()
 
-        #self.base_click(element.gongz)
-
-    def page_jiaobrlogin(self, uesr, password1):
-        """交接班人登录账号"""
+    def page_jiebrlogin(self, uesr="luhao", password1=1234):
+        """接班人登录账号"""
         self.page_shic()
         self.page_uesr(uesr)
         self.page_pwd(password1)

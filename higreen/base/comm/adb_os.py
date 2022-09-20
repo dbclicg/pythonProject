@@ -6,16 +6,25 @@
 import os
 
 
-def adb_execute():
+def adb_execute(appActivity):
     isdevices = os.popen(r'adb shell dumpsys window | findstr mCurrentFocus', 'r')
     devices = isdevices.read()
-    appActivity = devices[24:-2].replace('\n', '').replace('\r', '').replace(' ', '').split('/')[1]
-
-    if appActivity in "com.ap.dbc.hjx.marker.app.ui.switchwork.SwitchWorkHomeActivity":
+    # appActivity = devices[24:-2].replace('\n', '').replace('\r', '').replace(' ', '').split('/')[1]
+    # print(appActivity)
+    if devices.find(appActivity) != -1:
         return True
     else:
         return False
 
 
+def adb_keyevent(keyid):
+    """
+    手机拍照
+    :param keyid: 按键标识id
+    :return: 必须在先打开手机拍照页面
+    """
+    os.system('adb shell input keyevent {}'.format(int(keyid)))
+
+
 if __name__ == '__main__':
-    print(adb_execute())
+    adb_keyevent(27)
