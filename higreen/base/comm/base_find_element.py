@@ -4,6 +4,8 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
+from higreen.base.comm.log_loguru import Logings
+
 
 class Base_element:
     def __init__(self, driver):
@@ -21,7 +23,7 @@ class Base_element:
             return WebDriverWait(self.driver, timeout=time, poll_frequency=poll).until(lambda x: x.find_element(*loc))
 
         except Exception:
-            print("元素获取失败，正在重新定位元素：{}".format(loc))
+            Logings().debug("元素获取失败，正在重新定位元素：{}".format(loc))
 
     def base_find_elements(self, loc, time=30, poll=0.5):
         """
@@ -34,7 +36,7 @@ class Base_element:
         try:
             return WebDriverWait(self.driver, timeout=time, poll_frequency=poll).until(lambda x: x.find_elements(*loc))
         except Exception:
-            print("元素获取失败，正在重新定位元素：{}".format(loc))
+            Logings().debug("元素获取失败，正在重新定位元素：{}".format(loc))
 
     def base_find_element_located(self, loc):
         """
@@ -49,7 +51,7 @@ class Base_element:
             return WebDriverWait(self.driver, 5, 0.001).until(ec.presence_of_element_located((By.XPATH, loc))).text
 
         except Exception:
-            print("元素获取失败，正在重新定位元素：{}".format(loc))
+            Logings().debug("元素获取失败，正在重新定位元素：{}".format(loc))
 
 
 

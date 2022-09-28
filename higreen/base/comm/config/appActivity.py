@@ -15,3 +15,6 @@ shicxc_appActivity = "com.ap.dbc.hjx.marker.app.Activity.MarketCheckManage.Marke
 
 chouccj_appActivity = 'com.ap.dbc.hjx.marker.app.Activity.RandomInspection.RandomCheckActivity'
 """抽查抽检查询页"""
+
+chouczg = 'com.ap.dbc.hjx.marker.app.Activity.RandomInspection.RandomAbarbeitungRecordActivity'
+"""抽查整改"""

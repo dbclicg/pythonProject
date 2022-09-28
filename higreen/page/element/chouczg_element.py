@@ -6,7 +6,10 @@
 # @Software: PyCharm
 from appium.webdriver.webdriver import AppiumBy
 
-chouczgcd = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list_menue_select"]/android.widget.LinearLayout[2]/android.widget.GridView[1]/android.widget.RelativeLayout[7]/android.widget.RelativeLayout[1]/android.widget.ImageView[1]'
+gongz = AppiumBy.XPATH, r'//*[@text="工作"]'
+"""工作"""
+
+chouczgcd = AppiumBy.XPATH, r'//*[@text="抽查整改"]'
 """抽查整改菜单"""
 
 chouczglbsj = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list_random_check_recorde"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]'

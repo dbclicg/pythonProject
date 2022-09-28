@@ -7,6 +7,7 @@ from higreen.base.comm.config import appActivity, file
 from higreen.base.comm.adb_os import adb_execute
 from higreen.page.element import shicxc_element as element
 from ddt import ddt, file_data
+from higreen.base.comm.log_loguru import Logings
 
 
 @ddt()
@@ -47,8 +48,8 @@ class Test_Shicxc(unittest.TestCase):
                 self.shic_driver.screenshot()
                 self.assertTrue(self.shic_driver.is_text(message, title),
                                 ">>>>>>>>>查看预期结果是否正确：{}".format(message))
-            except Exception as error:
-                print("page_pass_shicxc,提交断言失败>>>>>>>报错：", error)
+            except AttributeError as error:
+                Logings().exception("page_pass_shicxc,提交断言失败>>>>>>>报错：", error)
                 raise error
             finally:
                 if Rectification:
@@ -60,7 +61,8 @@ class Test_Shicxc(unittest.TestCase):
                             """等待指定 activity 页出现再执行后面代码"""
                             self.shic_driver.screenshot()
                             self.assertTrue(self.shic_driver.is_text(zgmessage, title))
-                        except Exception as err:
+                        except AttributeError as err:
+                            Logings().exception("page_pass_shicxc,提交断言失败>>>>>>>报错：", err)
                             raise err
                         finally:
                             self.shic_driver.page_click_fanhui()
@@ -74,8 +76,8 @@ class Test_Shicxc(unittest.TestCase):
                 self.shic_driver.screenshot()
                 self.assertTrue(self.shic_driver.is_text(message, title),
                                 ">>>>>>>>>查看预期结果是否正确：{}".format("提交成功"))
-            except Exception as err:
-                print("page_pass_shicxc,提交断言失败>>>>>>>报错：结果不为真")
+            except AttributeError as err:
+                Logings().exception("page_pass_shicxc,提交断言失败>>>>>>>报错：", err)
                 raise err
 
             finally:
@@ -88,7 +90,8 @@ class Test_Shicxc(unittest.TestCase):
                             """等待指定 activity 页出现再执行后面代码"""
                             self.shic_driver.screenshot()
                             self.assertTrue(self.shic_driver.is_text(zgmessage, title))
-                        except Exception as err:
+                        except AttributeError as err:
+                            Logings().exception("page_pass_shicxc,提交断言失败>>>>>>>报错：", err)
                             raise err
                         finally:
                             self.shic_driver.page_click_fanhui()

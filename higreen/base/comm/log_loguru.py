@@ -2,6 +2,8 @@ import os
 import datetime
 from loguru import logger
 
+from higreen.base.comm.config import file
+
 
 class Logings:
     __instance = None
@@ -9,7 +11,7 @@ class Logings:
     DATE = datetime.datetime.now().strftime('%Y-%m-%d')
 
     # 项目路径下创建log目录保存日志文件
-    logpath = os.path.join(os.path.dirname(os.getcwd()), "logs")  # 拼接指定路径
+    logpath = os.path.join(file.log_path, "logs")  # 拼接指定路径
     # 判断目录是否存在，不存在则创建新的目录
     if not os.path.isdir(logpath):
         os.makedirs(logpath)

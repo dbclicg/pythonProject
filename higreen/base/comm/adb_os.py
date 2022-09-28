@@ -19,9 +19,8 @@ def adb_execute(appActivity):
 
 def adb_keyevent(keyid):
     """
-    手机拍照
     :param keyid: 按键标识id
-    :return: 必须在先打开手机拍照页面
+    :return:
     """
     os.system('adb shell input keyevent {}'.format(int(keyid)))
 

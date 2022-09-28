@@ -35,11 +35,10 @@ xuanzdangw = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list
 xuncxm = AppiumBy.XPATH, '//*[@text="消防巡查"]'
 """市场巡查--巡查项目"""
 
-xuncnr = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list_check"]'
+xuncnr = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list_check"]/android.widget.LinearLayout[1]'
 "市场巡查--巡查内容"
 
-xuanzbhgx = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list_small"]/android.widget.RelativeLayout[' \
-                            '1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1] '
+xuanzbhgx = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/list_small"]'
 """勾选不合格项"""
 
 dangwpz = AppiumBy.XPATH, '//*[@resource-id="com.padmatek.szhigreenmb:id/layout_select_time"]/android.widget' \

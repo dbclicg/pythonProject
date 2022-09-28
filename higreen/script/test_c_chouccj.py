@@ -8,12 +8,13 @@ from higreen.base.comm.config import appActivity
 from ddt import ddt, file_data, unpack
 
 
-@ddt()
+@ddt
 class Test_Chouccj(unittest.TestCase):
     driver = None
 
     @classmethod
     def setUpClass(cls) -> None:
+        time.sleep(1)
         cls.driver = Driver.driver_get()
         cls.login_driver = Call_page(cls.driver).login()
         cls.chouccj_driver = Call_page(cls.driver).chouccj()

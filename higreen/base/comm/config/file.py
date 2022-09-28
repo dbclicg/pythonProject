@@ -7,6 +7,8 @@ path = PATH(os.getcwd()).split('higreen')[0]
 登录测试数据文件路径
 """
 
+log_path = path + "higreen\Outputs"
+"""日志存放"""
 
 jietbc = path + r'higreen\Outputs\screenshot\error_img'
 """

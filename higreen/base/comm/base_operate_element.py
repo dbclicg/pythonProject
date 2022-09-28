@@ -20,6 +20,8 @@ from selenium.webdriver import ActionChains as action
 
 from selenium.webdriver.support import expected_conditions as EC
 
+from higreen.base.comm.log_loguru import Logings
+
 PATH = lambda p: os.path.abspath(p)
 sure_text = comm.sure_text
 
@@ -73,7 +75,7 @@ class Base_operate_element(base_find_element.Base_element):
         """
         ele_toast = self.base_find_element_located(loc)
         el_toast = ele_toast.text
-        print(">>>>>>>>>提示：", el_toast)
+        Logings().debug(">>>>>>>>>提示：", el_toast)
         return el_toast
 
     def base_toast_content(self, message):
@@ -86,7 +88,7 @@ class Base_operate_element(base_find_element.Base_element):
         try:
             tmp_feature = By.XPATH, "//*[contains(@text,'%s')]" % message
             ele = self.base_find_element(tmp_feature, 3, 0.05).text
-            print("获取toast信息：{}>>>>>>>>>>>>>成功".format(ele))
+            Logings().debug("获取toast信息：{}>>>>>>>>>>>>>成功".format(ele))
             return True
         except:
             return False
@@ -114,7 +116,7 @@ class Base_operate_element(base_find_element.Base_element):
         try:
             toast_loc = (By.XPATH, ".//*[contains(@text,'%s')]" % text)
             element = self.base_find_element(toast_loc, time=5, poll=0.01)
-            print(">>>>>>>>>提示：", element.text)
+            Logings().debug(">>>>>>>>>提示：", element.text)
             return True
         except:
             return False
@@ -163,7 +165,7 @@ class Base_operate_element(base_find_element.Base_element):
         """
         try:
             size = self.driver.get_window_size()
-            print(size)
+            Logings().debug(size)
             width = size["width"]
             height = size["height"]
             return width, height
@@ -226,7 +228,7 @@ class Base_operate_element(base_find_element.Base_element):
                 .press(x=x_3 * x, y=y_3 * y, pressure=1).move_to(x=x_4 * x, y=y_4 * y, ).wait(1000).release() \
                 .press(x=x_5 * x, y=y_5 * y, pressure=1).move_to(x=x_6 * x, y=y_6 * y, ).wait(1000).release() \
                 .press(x=x_7 * x, y=y_7 * y, pressure=1).move_to(x=x_8 * x, y=y_8 * y, ).wait(1000).release().perform()
-        except AssertionError as err:
+        except Exception as err:
             raise err
 
     def swipe_down(self, t=10, n=1):
@@ -243,7 +245,7 @@ class Base_operate_element(base_find_element.Base_element):
             for i in range(n):
                 self.driver.swipe(start_x, start_y, end_x, end_y, t)
         except:
-            print("没有找到该元素")
+            Logings().debug("没有找到该元素")
 
     def swipe_up(self, t=10, n=1):
         """
@@ -260,7 +262,7 @@ class Base_operate_element(base_find_element.Base_element):
                 self.driver.swipe(start_x, start_y, end_x, end_y, t)
 
         except:
-            print("没有找到该元素")
+            Logings().debug("没有找到该元素")
 
     def swipe_right(self, t=10, n=1):
         """
@@ -319,7 +321,7 @@ class Base_operate_element(base_find_element.Base_element):
         elif direction == 'right':
             self.swipe_right(t, n)
         else:
-            print("请传参数 'down' or 'up' or 'left' or 'right'")
+            Logings().debug("请传参数 'down' or 'up' or 'left' or 'right'")
 
     def swipe_element(self, el):
         """
@@ -350,19 +352,20 @@ class Base_operate_element(base_find_element.Base_element):
         try:
             ext = process.extractOne(expect_text, result)
             if ext[1] == 100:
-                print("截图识别的比较相似度为：{}>>>>>>>>>实际识别结果:".format(ext[1]), ext[0])
+                Logings().debug("截图识别的比较相似度为：{}>>>>>>>>>实际识别结果:{}，>>>>>>>>>预期结果：{}".format(ext[1], ext[0], expect_text))
                 return True
             elif expect_text in ext[0]:
-                print(
+                Logings().debug(
                     "使用in 》 匹配提示文案：'{}'成功，>>>>>>>>>实际识别结果:{}，>>>>>>>>>预期结果：{}，>>>>>>相似度:{}%".format(expect_text, ext[0],
                                                                                                     expect_text,
                                                                                                     ext[1]))
                 return True
             else:
-                print("截图识别的比较相似度为：{}>>>>>>>>>实际识别结果:".format(ext[1]), ext[0])
-                self.copy_files(title+'_'+time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())))
+                Logings().debug("截图识别的比较相似度为：{}>>>>>>>>>实际识别结果:{}，>>>>>>>>>预期结果：{}".format(ext[1], ext[0], expect_text))
+                self.copy_files(title + '_' + time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())))
                 return False
-        except Exception:
+        except Exception as ree:
+            Logings().debug(ree)
             self.copy_files(title)
             return False
 
@@ -396,15 +399,15 @@ class Base_operate_element(base_find_element.Base_element):
                             """
                             将文件复制到
                             """
-                        print(os.path.join(foldName, filename), "<<<复制到>>>",
-                              os.path.join(file.new_file_path, new_name))
+                        Logings().debug(os.path.join(foldName, filename), "<<<复制到>>>",
+                                        os.path.join(file.new_file_path, new_name))
 
     def base_checked(self, loc, isyonghxy):
         if not isyonghxy:
             self.base_click(loc)
-            print('勾选成功')
+            Logings().debug('勾选成功')
         else:
-            print('已勾选协议')
+            Logings().debug('已勾选协议')
         time.sleep(1)
 
     def base_is_enabled(self, el):
@@ -416,18 +419,20 @@ class Base_operate_element(base_find_element.Base_element):
         """
         处理系统弹窗
         """
+        Logings().debug("开始获取系统权限....")
         for i in range(cycle):
-
             for a in suretext:
                 try:
                     popup = self.driver.find_element(AppiumBy.XPATH, "//*[@text='%s']" % a)
                     if popup:
+                        Logings().debug("点击：{}".format(a))
                         popup.click()
                         time.sleep(1)
                     else:
-                        print(">>>>>>>>>>>>没有系统权限提示")
+                        Logings().debug("权限已全部获取")
                 except:
                     pass
+        Logings().debug("已获取系统权限")
 
 
 if __name__ == '__main__':

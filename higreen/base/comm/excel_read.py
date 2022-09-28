@@ -2,7 +2,7 @@ import xlrd
 from higreen.base.comm.config import file
 
 
-def excel_to_list(sheet, data_file=file.test_data):
+def excel_to_list(sheet, data_file=file.xlsx_test_data):
     """
     获取测试数据--列表嵌套字典格式
     获取工作簿中所有数据
@@ -13,7 +13,7 @@ def excel_to_list(sheet, data_file=file.test_data):
     data_list = []
     wb = xlrd.open_workbook(data_file)
     """
-    实例--要打开的.xlsx文件
+    实例--要打开的.xlsx文件 
     """
     sh = wb.sheet_by_name(sheet)
     """

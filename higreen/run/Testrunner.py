@@ -1,9 +1,11 @@
 import os
 import shutil
 import unittest
-
+import time
 from unittestreport import TestRunner
 from higreen.base.comm.config import file
+
+start = time.clock()
 
 
 def run_cases(filename, tester, desc, title, templates=2, pattern="test_*.py", report_dir=file.reports):
@@ -17,15 +19,18 @@ def run_cases(filename, tester, desc, title, templates=2, pattern="test_*.py", r
     :param templates: 报告模板 1 or 2
     :return:
     """
+
     try:
         shutil.rmtree(file.new_file_path)
         os.mkdir(file.new_file_path)
         suite = unittest.defaultTestLoader.discover(file.test_cases, pattern)
-
         runner = TestRunner(suite, filename, report_dir, title, tester, desc, templates)
-        runner.rerun_run(count=2, interval=1)
+        runner.run()
     except AttributeError as ree:
         raise ree
+    end = time.clock()
+    runTime = end - start
+    print("运行时间：{}s".format(runTime))
 
 
 class Test_Run:
@@ -33,6 +38,4 @@ class Test_Run:
 
 
 if __name__ == '__main__':
-    run_cases("higreen_report", "李天浩", "平湖—海吉星app", "海吉星登录", pattern='test_shicxc.py')
-
-
+    run_cases("higreen_report", "李天浩", "平湖—海吉星app", "海吉星登录", pattern='test_d_chouczg.py')
